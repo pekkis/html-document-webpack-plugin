@@ -47,9 +47,11 @@ HtmlCreatorPlugin.prototype.apply = function apply(compiler) {
       return ret;
     }, []);
 
-    const css = assets
+    const css = config.css.concat(
+      assets
       .filter(asset => asset.endsWith('.css'))
       .map(asset => `/${asset}`)
+    );
 
     const js = assets
       .filter(asset => asset.endsWith('.js'))
