@@ -57,8 +57,11 @@ HtmlCreatorPlugin.prototype.apply = function apply(compiler) {
       .filter(asset => asset.endsWith('.js'))
       .map(asset => `/${asset}`);
 
+    const HtmlDocumentComponent = config.component || HTMLDocument;
+    const content = config.content || <span>Loading...</span>;
+
     const rendered = renderToStaticMarkup(
-      <HTMLDocument
+      <HtmlDocumentComponent
         title={config.title}
         scripts={js}
         stylesheets={css}
@@ -69,8 +72,8 @@ HtmlCreatorPlugin.prototype.apply = function apply(compiler) {
           },
         ]}
       >
-        <span>Loading</span>
-      </HTMLDocument>
+        {content}
+      </HtmlDocumentComponent>
     );
 
     const doc = `<!DOCTYPE html>\n${rendered}`;
